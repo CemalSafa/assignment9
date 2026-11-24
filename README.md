@@ -19,3 +19,4 @@ Full-stack Reading List app: Express 5 REST API + React (Vite) client.
 
 ## Challenges
 (to be completed)
+
