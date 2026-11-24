@@ -50,6 +50,12 @@ assignment9/
 
 ## curl and preflight evidence
 
+Experiment and observation:
+**Experiment: what happens if express.json() is moved below the routes?**
+I moved `app.use(express.json())` below the routes and sent a valid JSON body with a POST to `/api/books`. The server returned `400 Bad Request` with `{"error":"Request body must be a JSON object"}`. Express only fills `req.body` when the body parser runs before the route handler. Since the routes ran first, `req.body` stayed `undefined` and my validation rejected it, so even a correct JSON body was treated as invalid. The parser must be registered before the routes.
+
+
+
 ## Experiment and observation
 **Experiment: what happens if express.json() is moved below the routes?**
 I moved `app.use(express.json())` below the routes and sent a valid JSON body with a POST to `/api/books`. The server returned `400 Bad Request` with `{"error":"Request body must be a JSON object"}`. Express only fills `req.body` when the body parser runs before the route handler. Since the routes ran first, `req.body` stayed `undefined` and my validation rejected it, so even a correct JSON body was treated as invalid. The parser must be registered before the routes.
@@ -75,7 +81,6 @@ Rapidly typing in the search input or switching filter/sort dropdowns can trigge
 What happens to books and nextId when the server restarts, and why?
 Because booksStore.js keeps state in memory (let books and let nextId initialized from INITIAL_BOOKS), restarting the server resets the store back to the 6 initial seed books and resets nextId to 7. Any books added, modified, or deleted during the previous run are not persisted to disk or a database. Restarting the process therefore starts fresh from the seed dataset.
 
-
 ## Self-study notes
 URLSearchParams: Builds clean query strings from non-empty filter and sort values (q, genre, read, sort, order) without manual string concatenation errors.
 
@@ -93,4 +98,3 @@ PowerShell quoting and line-ending rules when running multi-line commands and se
 
 Keeping form state synchronized—such as clearing/disabling rating when read is unchecked and resetting edit mode—while matching strict server-side validation rules required careful state handling in App.jsx and BookForm.jsx.
 
-- Verified full-stack flow with Express API on port 3000 and Vite client on port 5173.
