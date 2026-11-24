@@ -49,6 +49,11 @@ assignment9/
 
 ## curl and preflight evidence
 
+Experiment and observation:
+**Experiment: what happens if express.json() is moved below the routes?**
+I moved `app.use(express.json())` below the routes and sent a valid JSON body with a POST to `/api/books`. The server returned `400 Bad Request` with `{"error":"Request body must be a JSON object"}`. Express only fills `req.body` when the body parser runs before the route handler. Since the routes ran first, `req.body` stayed `undefined` and my validation rejected it, so even a correct JSON body was treated as invalid. The parser must be registered before the routes.
+
+
 
 ## Reasoning questions
 Why validate input in server/validate.js instead of trusting the React client?
