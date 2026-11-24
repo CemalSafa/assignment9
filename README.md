@@ -20,3 +20,5 @@ Full-stack Reading List app: Express 5 REST API + React (Vite) client.
 ## Challenges
 (to be completed)
 
+
+- Verified full-stack flow with Express API on port 3000 and Vite client on port 5173.
